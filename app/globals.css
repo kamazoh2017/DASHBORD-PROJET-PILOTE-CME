@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-orange: #FF6B00;
+  --primary-green: #009639;
+  --secondary-orange: #FF9149;
+  --secondary-green: #00B548;
+  --bg-light: #F8FAFC;
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+[data-hydration-error] {
+  display: none !important;
+}
+
+body {
+  background-color: var(--bg-light);
+}
+
+.card {
+  @apply bg-white rounded-xl shadow-md p-6 transition-shadow hover:shadow-lg;
+}
+
+.btn-primary {
+  @apply bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors;
+}
+
+.btn-secondary {
+  @apply bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors;
+}
+
+.table-header {
+  @apply bg-gray-100 text-gray-700 font-semibold text-sm;
+}
+
+.status-success {
+  @apply text-green-600 bg-green-50 px-2 py-1 rounded;
+}
+
+.status-warning {
+  @apply text-orange-600 bg-orange-50 px-2 py-1 rounded;
+}
+
+.status-danger {
+  @apply text-red-600 bg-red-50 px-2 py-1 rounded;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
