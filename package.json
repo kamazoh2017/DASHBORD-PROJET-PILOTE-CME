@@ -1,11 +1,17 @@
 {
-  "name": "app",
+  "name": "dashboard-cme",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:migrate": "prisma migrate deploy",
+    "vercel-build": "prisma generate && prisma db push && next build"
   },
   "prisma": {
     "seed": "tsx --require dotenv/config scripts/seed.ts"
