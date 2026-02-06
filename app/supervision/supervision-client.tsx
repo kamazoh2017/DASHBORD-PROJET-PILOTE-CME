@@ -83,7 +83,7 @@ function CumulativeTable({ data, title }: { data: DailyData[]; title: string }) 
               );
             })}
             <tr className="bg-blue-50 font-semibold">
-              <td className="px-3 py-3">{t('common.total', { ns: 'common', defaultValue: 'TOTAL' })}</td>
+              <td className="px-3 py-3">{tCommon('total')}</td>
               <td className="px-3 py-3 text-center">{totals.sageFemmesFormees}</td>
               <td className="px-3 py-3 text-center">{totals.sageFemmesPresentes}</td>
               <td className="px-3 py-3 text-center text-blue-600">{totals.femmesEnceintesRecues}</td>

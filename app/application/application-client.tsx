@@ -83,7 +83,7 @@ function CumulativeTableApp({ data, title }: { data: DailyData[]; title: string 
               );
             })}
             <tr className="bg-green-50 font-semibold">
-              <td className="px-3 py-3">{t('common.total', { ns: 'common', defaultValue: 'TOTAL' })}</td>
+              <td className="px-3 py-3">{tCommon('total')}</td>
               <td className="px-3 py-3 text-center">{totals.sageFemmesFormees}</td>
               <td className="px-3 py-3 text-center">{totals.sageFemmesPresentes}</td>
               <td className="px-3 py-3 text-center text-blue-600">{totals.femmesEnceintesRecues}</td>
@@ -308,11 +308,11 @@ export default function ApplicationClient() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <SageFemmeChart 
           data={sageFemmeData} 
-          title={`${t('charts.registered')} ${t('charts.byEstablishment')}`}
+          title={`${t('table.presentMidwives')} ${t('charts.byEstablishment')}`}
         />
         {/* Chart SF Présentes - Histogramme empilé */}
         <div className="bg-white rounded-xl shadow-md p-6">
-          <h3 className="font-semibold text-gray-800 mb-4">{t('charts.registered')} {t('charts.byEstablishment')}</h3>
+          <h3 className="font-semibold text-gray-800 mb-4">{t('table.presentMidwives')} {t('charts.byEstablishment')}</h3>
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={sageFemmeData} margin={{ top: 20, right: 30, left: 20, bottom: 80 }}>
