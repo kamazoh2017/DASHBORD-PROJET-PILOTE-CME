@@ -11,9 +11,11 @@ import { DailyData } from '@/lib/types';
 import { PROJECT_START_DATE, countWorkingDays, DAILY_OBJECTIVE, formatDateFR, ETABLISSEMENTS, isDayDataAvailable, FINAL_TARGET } from '@/lib/constants';
 import { Users, UserCheck, Target, Calendar, Loader2, AlertCircle, Flag } from 'lucide-react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { useTranslations } from 'next-intl';
 
 // Composant pour le tableau cumulé par établissement
 function CumulativeTable({ data, title }: { data: DailyData[]; title: string }) {
+  const t = useTranslations('supervision');
   // Agréger les données par établissement
   const aggregatedData = ETABLISSEMENTS.map(etab => {
     const etabData = data.filter(d => d.etablissement === etab);
@@ -48,13 +50,13 @@ function CumulativeTable({ data, title }: { data: DailyData[]; title: string }) 
         <table className="w-full text-sm">
           <thead className="bg-gray-100">
             <tr>
-              <th className="px-3 py-3 text-left text-gray-700 font-semibold">Établissement</th>
-              <th className="px-3 py-3 text-center text-gray-700 font-semibold">SF Formées</th>
-              <th className="px-3 py-3 text-center text-gray-700 font-semibold">SF Présentes (cum.)</th>
-              <th className="px-3 py-3 text-center text-gray-700 font-semibold">FE Reçues</th>
-              <th className="px-3 py-3 text-center text-gray-700 font-semibold">FE Enregistrées</th>
-              <th className="px-3 py-3 text-center text-gray-700 font-semibold">Taux Enreg.</th>
-              <th className="px-3 py-3 text-center text-gray-700 font-semibold">FE Connectées</th>
+              <th className="px-3 py-3 text-left text-gray-700 font-semibold">{t('table.establishment')}</th>
+              <th className="px-3 py-3 text-center text-gray-700 font-semibold">{t('table.trainedMidwives')}</th>
+              <th className="px-3 py-3 text-center text-gray-700 font-semibold">{t('table.presentMidwives')}</th>
+              <th className="px-3 py-3 text-center text-gray-700 font-semibold">{t('table.receivedPregnant')}</th>
+              <th className="px-3 py-3 text-center text-gray-700 font-semibold">{t('table.registeredPregnant')}</th>
+              <th className="px-3 py-3 text-center text-gray-700 font-semibold">{t('table.registrationRate')}</th>
+              <th className="px-3 py-3 text-center text-gray-700 font-semibold">{t('table.connectedPregnant')}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
@@ -81,7 +83,7 @@ function CumulativeTable({ data, title }: { data: DailyData[]; title: string }) 
               );
             })}
             <tr className="bg-blue-50 font-semibold">
-              <td className="px-3 py-3">TOTAL CUMULÉ</td>
+              <td className="px-3 py-3">{t('common.total', { ns: 'common', defaultValue: 'TOTAL' })}</td>
               <td className="px-3 py-3 text-center">{totals.sageFemmesFormees}</td>
               <td className="px-3 py-3 text-center">{totals.sageFemmesPresentes}</td>
               <td className="px-3 py-3 text-center text-blue-600">{totals.femmesEnceintesRecues}</td>
@@ -101,6 +103,8 @@ function CumulativeTable({ data, title }: { data: DailyData[]; title: string }) 
 }
 
 export default function SupervisionClient() {
+  const t = useTranslations('supervision');
+  const tCommon = useTranslations('common');
   const [selectedDate, setSelectedDate] = useState('2026-02-05');
   const [dailyData, setDailyData] = useState<DailyData[]>([]);
   const [cumulativeData, setCumulativeData] = useState<DailyData[]>([]);
@@ -208,7 +212,7 @@ export default function SupervisionClient() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Reporting de Supervision</h1>
+        <h1 className="text-2xl font-bold text-gray-800">{t('pageTitle')}</h1>
         <p className="text-gray-600">Données collectées par les superviseurs terrain (1er lien Google Sheets)</p>
       </div>
 
@@ -221,7 +225,7 @@ export default function SupervisionClient() {
         <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-6 flex items-center gap-3">
           <AlertCircle className="text-yellow-600" size={24} />
           <div>
-            <p className="font-medium text-yellow-800">Données non encore disponibles</p>
+            <p className="font-medium text-yellow-800">{tCommon('noDataAvailable')}</p>
             <p className="text-sm text-yellow-600">Les données du jour sont disponibles à partir de 14h. Sélectionnez une date antérieure ou revenez après 14h.</p>
           </div>
         </div>
@@ -230,20 +234,20 @@ export default function SupervisionClient() {
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <KPICard
-          title="FE Enregistrées (Jour)"
+          title={t('kpis.registeredPregnant')}
           value={dailyTotals.enregistrees}
           subtitle={`Objectif: ${DAILY_OBJECTIVE}`}
           icon={Users}
           color={dailyTotals.enregistrees >= DAILY_OBJECTIVE ? 'green' : 'orange'}
         />
         <KPICard
-          title="FE Connectées (Jour)"
+          title={t('kpis.connectedPregnant')}
           value={dailyTotals.connectees}
           icon={UserCheck}
           color="green"
         />
         <KPICard
-          title="Total Cumulé FE Enregistrées"
+          title={`${tCommon('total')} ${t('kpis.registeredPregnant')}`}
           value={cumulativeTotals.enregistrees}
           subtitle={`Objectif: ${objectifCumule} | Cible: ${FINAL_TARGET}`}
           icon={Target}
@@ -279,7 +283,7 @@ export default function SupervisionClient() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <ObjectiveChart 
           data={dailyChartData} 
-          title="Performance Journalière vs Objectif (22 FE)" 
+          title={`${t('charts.dailyEvolution')} vs Objectif (22 FE)`}
           showObjectiveLine
         />
         <CumulativeChart 
@@ -291,11 +295,11 @@ export default function SupervisionClient() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <SageFemmeChart 
           data={sageFemmeData} 
-          title="Sage-Femmes Formées vs Présentes par Établissement" 
+          title={`${t('charts.midwives')} ${t('charts.byEstablishment')}`}
         />
         {/* Chart SF Présentes - Histogramme empilé */}
         <div className="bg-white rounded-xl shadow-md p-6">
-          <h3 className="font-semibold text-gray-800 mb-4">Comparaison SF Présentes entre Établissements</h3>
+          <h3 className="font-semibold text-gray-800 mb-4">{t('charts.midwives')} {t('charts.byEstablishment')}</h3>
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={sageFemmeData} margin={{ top: 20, right: 30, left: 20, bottom: 80 }}>
@@ -313,7 +317,7 @@ export default function SupervisionClient() {
                 <Legend verticalAlign="top" wrapperStyle={{ fontSize: 11 }} />
                 <Bar 
                   dataKey="presentes" 
-                  name="SF Présentes" 
+                  name={t('table.presentMidwives')}
                   fill="#009639" 
                   radius={[4, 4, 0, 0]}
                   stackId="sf"
