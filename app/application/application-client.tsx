@@ -16,6 +16,7 @@ import { useTranslations } from 'next-intl';
 // Composant pour le tableau cumulé par établissement (données application)
 function CumulativeTableApp({ data, title }: { data: DailyData[]; title: string }) {
   const t = useTranslations('application');
+  const tCommon = useTranslations('common');
   // Agréger les données par établissement
   const aggregatedData = ETABLISSEMENTS.map(etab => {
     const etabData = data.filter(d => d.etablissement === etab);
