@@ -1,6 +1,15 @@
 # 📊 Dashboard Projet Pilote CME
 
-> 📚 **[→ Voir l'index complet de la documentation (INDEX.md)](INDEX.md)** - Guide de navigation dans toute la documentation
+> 📚 **[→ COMMENCEZ ICI : LISEZ-MOI-EN-PREMIER.md](LISEZ-MOI-EN-PREMIER.md)** - Guide de bienvenue et démarrage rapide
+> 
+> 📖 **[→ Index complet de la documentation (INDEX.md)](INDEX.md)** - Guide de navigation dans toute la documentation
+
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.2-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue?logo=postgresql)](https://www.postgresql.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?logo=prisma)](https://www.prisma.io/)
+[![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://vercel.com)
+[![License](https://img.shields.io/badge/License-Projet%20Gouvernemental-green)]()
 
 Tableau de bord de reporting pour le suivi de l'exécution de la phase pilote du projet de digitalisation du Carnet Mère-Enfant.
 
