@@ -1,5 +1,7 @@
 # 📊 Dashboard Projet Pilote CME
 
+> 📚 **[→ Voir l'index complet de la documentation (INDEX.md)](INDEX.md)** - Guide de navigation dans toute la documentation
+
 Tableau de bord de reporting pour le suivi de l'exécution de la phase pilote du projet de digitalisation du Carnet Mère-Enfant.
 
 ## 🎯 Objectif
