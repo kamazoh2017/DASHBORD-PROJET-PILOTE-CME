@@ -1,0 +1,170 @@
+{
+  "metadata": {
+    "title": "Tableau de Bord Phase Pilote - Carnet Mère-Enfant Digital",
+    "description": "Tableau de bord de suivi de la phase pilote du projet de digitalisation du carnet mère-enfant en Côte d'Ivoire"
+  },
+  "sidebar": {
+    "title": "Phase Pilote",
+    "subtitle": "Carnet Mère-Enfant Digital",
+    "nav": {
+      "home": "Accueil",
+      "supervision": "Reporting Supervision",
+      "application": "Reporting Application",
+      "comparison": "Comparaison Sup. vs App."
+    },
+    "refreshButton": "Actualiser les données",
+    "refreshing": "Actualisation...",
+    "footer": "Côte d'Ivoire 2026"
+  },
+  "home": {
+    "pageTitle": "Vue d'ensemble",
+    "kpis": {
+      "registered": "Femmes Enceintes Enregistrées",
+      "connected": "Femmes Enceintes Connectées",
+      "received": "Femmes Enceintes Reçues",
+      "cumulativeTarget": "Objectif Cumulé",
+      "achievementRate": "Taux d'Atteinte",
+      "workingDays": "Jours Ouvrables",
+      "totalDays": "Total Jours"
+    },
+    "charts": {
+      "byEstablishment": "Par Établissement",
+      "dailyProgress": "Progression Quotidienne",
+      "distribution": "Répartition",
+      "registered": "Enregistrées",
+      "connected": "Connectées",
+      "received": "Reçues"
+    },
+    "table": {
+      "establishment": "Établissement",
+      "received": "Reçues",
+      "registered": "Enregistrées",
+      "registrationRate": "Taux Enr.",
+      "connected": "Connectées",
+      "connectionRate": "Taux Conn.",
+      "total": "Total"
+    },
+    "comparison": {
+      "title": "Performance vs Objectif vs Cible Finale",
+      "finalTarget": "Cible Finale (27 Fév) - 100%",
+      "currentTarget": "Objectif Actuel",
+      "performance": "Performance",
+      "targetAchieved": "Objectif Atteint",
+      "gap": "Écart"
+    },
+    "period": {
+      "label": "Période",
+      "from": "du",
+      "to": "au"
+    },
+    "export": {
+      "button": "Exporter PDF",
+      "exporting": "Exportation..."
+    },
+    "noData": "Aucune donnée disponible",
+    "lastRefresh": "Dernière actualisation"
+  },
+  "supervision": {
+    "pageTitle": "Reporting Supervision",
+    "kpis": {
+      "trainedMidwives": "Sages-Femmes Formées",
+      "presentMidwives": "Sages-Femmes Présentes",
+      "registeredPregnant": "Femmes Enceintes Enregistrées",
+      "connectedPregnant": "Femmes Enceintes Connectées"
+    },
+    "charts": {
+      "dailyEvolution": "Évolution Quotidienne",
+      "byEstablishment": "Par Établissement",
+      "registered": "Enregistrées",
+      "connected": "Connectées",
+      "midwives": "Sages-Femmes"
+    },
+    "table": {
+      "date": "Date",
+      "establishment": "Établissement",
+      "trainedMidwives": "Formées",
+      "presentMidwives": "Présentes",
+      "receivedPregnant": "Reçues",
+      "registeredPregnant": "Enregistrées",
+      "connectedPregnant": "Connectées",
+      "registrationRate": "Taux Enr.",
+      "connectionRate": "Taux Conn."
+    }
+  },
+  "application": {
+    "pageTitle": "Reporting Application",
+    "kpis": {
+      "trainedMidwives": "Sages-Femmes Formées",
+      "presentMidwives": "Sages-Femmes Présentes",
+      "registeredPregnant": "Femmes Enceintes Enregistrées",
+      "connectedPregnant": "Femmes Enceintes Connectées"
+    },
+    "charts": {
+      "dailyEvolution": "Évolution Quotidienne",
+      "byEstablishment": "Par Établissement",
+      "registered": "Enregistrées",
+      "connected": "Connectées"
+    },
+    "table": {
+      "date": "Date",
+      "establishment": "Établissement",
+      "trainedMidwives": "Formées",
+      "presentMidwives": "Présentes",
+      "receivedPregnant": "Reçues",
+      "registeredPregnant": "Enregistrées",
+      "connectedPregnant": "Connectées",
+      "registrationRate": "Taux Enr.",
+      "connectionRate": "Taux Conn."
+    }
+  },
+  "comparison": {
+    "pageTitle": "Comparaison Supervision vs Application",
+    "tabs": {
+      "overview": "Vue d'ensemble",
+      "details": "Détails"
+    },
+    "charts": {
+      "comparisonByEstablishment": "Comparaison par Établissement",
+      "dailyComparison": "Comparaison Quotidienne",
+      "supervision": "Supervision",
+      "application": "Application",
+      "registered": "Enregistrées",
+      "connected": "Connectées"
+    },
+    "table": {
+      "establishment": "Établissement",
+      "supervisionRegistered": "Sup. Enregistrées",
+      "applicationRegistered": "App. Enregistrées",
+      "difference": "Différence",
+      "concordanceRate": "Taux de Concordance",
+      "supervisionConnected": "Sup. Connectées",
+      "applicationConnected": "App. Connectées"
+    },
+    "kpis": {
+      "totalSupervision": "Total Supervision",
+      "totalApplication": "Total Application",
+      "totalDifference": "Différence Totale",
+      "concordanceRate": "Taux de Concordance"
+    }
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "noDataAvailable": "Aucune donnée disponible",
+    "all": "Tous",
+    "filter": "Filtrer",
+    "reset": "Réinitialiser",
+    "apply": "Appliquer",
+    "close": "Fermer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "export": "Exporter",
+    "print": "Imprimer",
+    "search": "Rechercher",
+    "date": "Date",
+    "total": "Total",
+    "average": "Moyenne",
+    "percentage": "Pourcentage"
+  }
+}

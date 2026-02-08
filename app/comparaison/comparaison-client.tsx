@@ -6,6 +6,7 @@ import KPICard from '@/components/kpi-card';
 import ComparisonBarChart from '@/components/charts/comparison-bar-chart';
 import { GitCompare, CheckCircle, AlertTriangle, XCircle, Loader2, TrendingUp, TrendingDown, Flag } from 'lucide-react';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, BarChart, Bar, Cell } from 'recharts';
+import { useTranslations } from 'next-intl';
 
 interface ComparisonItem {
   date: string;
@@ -25,6 +26,8 @@ interface Stats {
 }
 
 export default function ComparaisonClient() {
+  const t = useTranslations('comparison');
+  const tCommon = useTranslations('common');
   const [comparison, setComparison] = useState<ComparisonItem[]>([]);
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
@@ -105,7 +108,7 @@ export default function ComparaisonClient() {
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
           <GitCompare className="text-purple-600" />
-          Comparaison Supervision vs Application
+          {t('pageTitle')}
         </h1>
         <p className="text-gray-600">Analyse des écarts entre les données de supervision et d'application</p>
       </div>
@@ -113,28 +116,28 @@ export default function ComparaisonClient() {
       {/* Statistics KPIs */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <KPICard
-          title="Taux de Concordance"
+          title={t('kpis.concordanceRate')}
           value={`${stats?.tauxConcordance ?? 0}%`}
           subtitle="Enregistrements identiques"
           icon={stats?.tauxConcordance && stats.tauxConcordance >= 80 ? CheckCircle : AlertTriangle}
           color={stats?.tauxConcordance && stats.tauxConcordance >= 80 ? 'green' : stats?.tauxConcordance && stats.tauxConcordance >= 50 ? 'orange' : 'red'}
         />
         <KPICard
-          title="Écart Moyen (Enreg.)"
+          title={`${t('table.difference')} (${t('charts.registered')})`}
           value={stats?.ecartMoyenEnregistrees ?? 0}
           subtitle="Par enregistrement"
           icon={TrendingUp}
           color="blue"
         />
         <KPICard
-          title="Écart Moyen (Connect.)"
+          title={`${t('table.difference')} (${t('charts.connected')})`}
           value={stats?.ecartMoyenConnectees ?? 0}
           subtitle="Par enregistrement"
           icon={TrendingDown}
           color="orange"
         />
         <KPICard
-          title="Écart Maximum"
+          title={`${t('table.difference')} Maximum`}
           value={stats?.ecartMax ?? 0}
           subtitle="Plus grand écart détecté"
           icon={XCircle}
@@ -153,8 +156,8 @@ export default function ComparaisonClient() {
         const progressionData = [
           { name: 'Cible (27 Fév)', value: FINAL_TARGET, color: '#9333ea' },
           { name: 'Objectif à date', value: objectifCumule, color: '#3b82f6' },
-          { name: 'Perf. Supervision', value: totalSupervision, color: '#f97316' },
-          { name: 'Perf. Application', value: totalApplication, color: '#22c55e' },
+          { name: `Perf. ${t('charts.supervision')}`, value: totalSupervision, color: '#f97316' },
+          { name: `Perf. ${t('charts.application')}`, value: totalApplication, color: '#22c55e' },
         ];
         
         return (
@@ -175,12 +178,12 @@ export default function ComparaisonClient() {
                 <p className="text-xs text-gray-500 mt-1">{Math.round(objectifCumule / FINAL_TARGET * 100)}% de la cible</p>
               </div>
               <div className="text-center p-4 bg-orange-50 rounded-lg">
-                <p className="text-sm text-gray-600 mb-1">Perf. Supervision</p>
+                <p className="text-sm text-gray-600 mb-1">Perf. {t('charts.supervision')}</p>
                 <p className="text-2xl font-bold text-orange-600">{totalSupervision}</p>
                 <p className="text-xs text-gray-500 mt-1">{Math.round(totalSupervision / FINAL_TARGET * 100)}% de la cible</p>
               </div>
               <div className="text-center p-4 bg-green-50 rounded-lg">
-                <p className="text-sm text-gray-600 mb-1">Perf. Application</p>
+                <p className="text-sm text-gray-600 mb-1">Perf. {t('charts.application')}</p>
                 <p className="text-2xl font-bold text-green-600">{totalApplication}</p>
                 <p className="text-xs text-gray-500 mt-1">{Math.round(totalApplication / FINAL_TARGET * 100)}% de la cible</p>
               </div>
@@ -207,15 +210,15 @@ export default function ComparaisonClient() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <ComparisonBarChart 
           data={byEtablissement} 
-          title="Comparaison par Établissement (FE Enregistrées)" 
+          title={`${t('charts.comparisonByEstablishment')} (${t('charts.registered')})`}
         />
         
         <div className="bg-white rounded-xl shadow-md p-6">
-          <h3 className="font-semibold text-gray-800 mb-4">Évolution des Écarts dans le Temps</h3>
+          <h3 className="font-semibold text-gray-800 mb-4">{t('charts.dailyComparison')}</h3>
           <div className="h-80">
             {trendData.length === 0 ? (
               <div className="flex items-center justify-center h-full text-gray-500">
-                Aucune donnée disponible
+                {tCommon('noDataAvailable')}
               </div>
             ) : (
               <ResponsiveContainer width="100%" height="100%">
@@ -231,8 +234,8 @@ export default function ComparaisonClient() {
                   <YAxis tickLine={false} tick={{ fontSize: 10 }} />
                   <Tooltip contentStyle={{ fontSize: 11, borderRadius: 8 }} />
                   <Legend verticalAlign="top" wrapperStyle={{ fontSize: 11 }} />
-                  <Line type="monotone" dataKey="supervision" name="Supervision" stroke="#FF6B00" strokeWidth={2} dot={{ r: 3 }} />
-                  <Line type="monotone" dataKey="application" name="Application" stroke="#009639" strokeWidth={2} dot={{ r: 3 }} />
+                  <Line type="monotone" dataKey="supervision" name={t('charts.supervision')} stroke="#FF6B00" strokeWidth={2} dot={{ r: 3 }} />
+                  <Line type="monotone" dataKey="application" name={t('charts.application')} stroke="#009639" strokeWidth={2} dot={{ r: 3 }} />
                 </LineChart>
               </ResponsiveContainer>
             )}
@@ -243,13 +246,13 @@ export default function ComparaisonClient() {
       {/* Comparison Table */}
       <div className="bg-white rounded-xl shadow-md overflow-hidden">
         <div className="px-6 py-4 bg-gray-50 border-b flex items-center justify-between">
-          <h3 className="font-semibold text-gray-800">Tableau Comparatif Détaillé</h3>
+          <h3 className="font-semibold text-gray-800">{t('tabs.details')}</h3>
           <select
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
             className="px-3 py-2 border rounded-lg text-sm"
           >
-            <option value="">Toutes les dates</option>
+            <option value="">{tCommon('all')}</option>
             {uniqueDates.map(date => (
               <option key={date} value={date}>{formatDateFR(date)}</option>
             ))}
@@ -259,21 +262,21 @@ export default function ComparaisonClient() {
           <table className="w-full text-sm">
             <thead className="bg-gray-100">
               <tr>
-                <th className="px-4 py-3 text-left text-gray-700 font-semibold">Date</th>
-                <th className="px-4 py-3 text-left text-gray-700 font-semibold">Établissement</th>
-                <th className="px-4 py-3 text-center text-orange-600 font-semibold">Sup. Enreg.</th>
-                <th className="px-4 py-3 text-center text-green-600 font-semibold">App. Enreg.</th>
-                <th className="px-4 py-3 text-center text-gray-700 font-semibold">Écart</th>
-                <th className="px-4 py-3 text-center text-orange-600 font-semibold">Sup. Connect.</th>
-                <th className="px-4 py-3 text-center text-green-600 font-semibold">App. Connect.</th>
-                <th className="px-4 py-3 text-center text-gray-700 font-semibold">Écart</th>
+                <th className="px-4 py-3 text-left text-gray-700 font-semibold">{tCommon('date')}</th>
+                <th className="px-4 py-3 text-left text-gray-700 font-semibold">{t('table.establishment')}</th>
+                <th className="px-4 py-3 text-center text-orange-600 font-semibold">{t('table.supervisionRegistered')}</th>
+                <th className="px-4 py-3 text-center text-green-600 font-semibold">{t('table.applicationRegistered')}</th>
+                <th className="px-4 py-3 text-center text-gray-700 font-semibold">{t('table.difference')}</th>
+                <th className="px-4 py-3 text-center text-orange-600 font-semibold">{t('table.supervisionConnected')}</th>
+                <th className="px-4 py-3 text-center text-green-600 font-semibold">{t('table.applicationConnected')}</th>
+                <th className="px-4 py-3 text-center text-gray-700 font-semibold">{t('table.difference')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {filteredComparison.length === 0 ? (
                 <tr>
                   <td colSpan={8} className="px-4 py-8 text-center text-gray-500">
-                    Aucune donnée disponible
+                    {tCommon('noDataAvailable')}
                   </td>
                 </tr>
               ) : (
@@ -321,7 +324,7 @@ export default function ComparaisonClient() {
 
       {/* Ecart by establishment detail */}
       <div className="mt-6 bg-white rounded-xl shadow-md p-6">
-        <h3 className="font-semibold text-gray-800 mb-4">Détail des Écarts par Établissement</h3>
+        <h3 className="font-semibold text-gray-800 mb-4">{t('charts.comparisonByEstablishment')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {byEtablissement.map((item, idx) => (
             <div 
@@ -335,15 +338,15 @@ export default function ComparaisonClient() {
               <h4 className="font-medium text-gray-800 mb-2">{item.fullName}</h4>
               <div className="grid grid-cols-3 gap-2 text-sm">
                 <div>
-                  <p className="text-gray-500">Supervision</p>
+                  <p className="text-gray-500">{t('charts.supervision')}</p>
                   <p className="font-semibold text-orange-600">{item.supervision}</p>
                 </div>
                 <div>
-                  <p className="text-gray-500">Application</p>
+                  <p className="text-gray-500">{t('charts.application')}</p>
                   <p className="font-semibold text-green-600">{item.application}</p>
                 </div>
                 <div>
-                  <p className="text-gray-500">Écart</p>
+                  <p className="text-gray-500">{t('table.difference')}</p>
                   <p className={`font-semibold ${
                     item.ecart === 0 ? 'text-green-600' :
                     item.ecart > 0 ? 'text-blue-600' : 'text-red-600'

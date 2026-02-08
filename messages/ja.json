@@ -1,0 +1,170 @@
+{
+  "metadata": {
+    "title": "パイロットフェーズダッシュボード - デジタル母子手帳",
+    "description": "コートジボワールにおける母子手帳デジタル化プロジェクトのパイロットフェーズ追跡ダッシュボード"
+  },
+  "sidebar": {
+    "title": "パイロットフェーズ",
+    "subtitle": "デジタル母子手帳",
+    "nav": {
+      "home": "ホーム",
+      "supervision": "監督レポート",
+      "application": "アプリケーションレポート",
+      "comparison": "監督 vs アプリの比較"
+    },
+    "refreshButton": "データ更新",
+    "refreshing": "更新中...",
+    "footer": "コートジボワール 2026"
+  },
+  "home": {
+    "pageTitle": "概要",
+    "kpis": {
+      "registered": "登録妊婦数",
+      "connected": "接続妊婦数",
+      "received": "受診妊婦数",
+      "cumulativeTarget": "累積目標",
+      "achievementRate": "達成率",
+      "workingDays": "営業日",
+      "totalDays": "総日数"
+    },
+    "charts": {
+      "byEstablishment": "医療機関別",
+      "dailyProgress": "日次進捗",
+      "distribution": "配分",
+      "registered": "登録",
+      "connected": "接続",
+      "received": "受診"
+    },
+    "table": {
+      "establishment": "医療機関",
+      "received": "受診数",
+      "registered": "登録数",
+      "registrationRate": "登録率",
+      "connected": "接続数",
+      "connectionRate": "接続率",
+      "total": "合計"
+    },
+    "comparison": {
+      "title": "パフォーマンス vs 目標 vs 最終目標",
+      "finalTarget": "最終目標（2月27日）- 100%",
+      "currentTarget": "現在の目標",
+      "performance": "実績",
+      "targetAchieved": "目標達成",
+      "gap": "不足"
+    },
+    "period": {
+      "label": "期間",
+      "from": "から",
+      "to": "まで"
+    },
+    "export": {
+      "button": "PDFエクスポート",
+      "exporting": "エクスポート中..."
+    },
+    "noData": "データがありません",
+    "lastRefresh": "最終更新"
+  },
+  "supervision": {
+    "pageTitle": "監督レポート",
+    "kpis": {
+      "trainedMidwives": "研修済助産師数",
+      "presentMidwives": "在席助産師数",
+      "registeredPregnant": "登録妊婦数",
+      "connectedPregnant": "接続妊婦数"
+    },
+    "charts": {
+      "dailyEvolution": "日次推移",
+      "byEstablishment": "医療機関別",
+      "registered": "登録",
+      "connected": "接続",
+      "midwives": "助産師"
+    },
+    "table": {
+      "date": "日付",
+      "establishment": "医療機関",
+      "trainedMidwives": "研修済",
+      "presentMidwives": "在席",
+      "receivedPregnant": "受診",
+      "registeredPregnant": "登録",
+      "connectedPregnant": "接続",
+      "registrationRate": "登録率",
+      "connectionRate": "接続率"
+    }
+  },
+  "application": {
+    "pageTitle": "アプリケーションレポート",
+    "kpis": {
+      "trainedMidwives": "研修済助産師数",
+      "presentMidwives": "在席助産師数",
+      "registeredPregnant": "登録妊婦数",
+      "connectedPregnant": "接続妊婦数"
+    },
+    "charts": {
+      "dailyEvolution": "日次推移",
+      "byEstablishment": "医療機関別",
+      "registered": "登録",
+      "connected": "接続"
+    },
+    "table": {
+      "date": "日付",
+      "establishment": "医療機関",
+      "trainedMidwives": "研修済",
+      "presentMidwives": "在席",
+      "receivedPregnant": "受診",
+      "registeredPregnant": "登録",
+      "connectedPregnant": "接続",
+      "registrationRate": "登録率",
+      "connectionRate": "接続率"
+    }
+  },
+  "comparison": {
+    "pageTitle": "監督 vs アプリケーション比較",
+    "tabs": {
+      "overview": "概要",
+      "details": "詳細"
+    },
+    "charts": {
+      "comparisonByEstablishment": "医療機関別比較",
+      "dailyComparison": "日次比較",
+      "supervision": "監督",
+      "application": "アプリケーション",
+      "registered": "登録",
+      "connected": "接続"
+    },
+    "table": {
+      "establishment": "医療機関",
+      "supervisionRegistered": "監督・登録",
+      "applicationRegistered": "アプリ・登録",
+      "difference": "差異",
+      "concordanceRate": "一致率",
+      "supervisionConnected": "監督・接続",
+      "applicationConnected": "アプリ・接続"
+    },
+    "kpis": {
+      "totalSupervision": "監督合計",
+      "totalApplication": "アプリ合計",
+      "totalDifference": "合計差異",
+      "concordanceRate": "一致率"
+    }
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "noDataAvailable": "利用可能なデータがありません",
+    "all": "すべて",
+    "filter": "フィルター",
+    "reset": "リセット",
+    "apply": "適用",
+    "close": "閉じる",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "export": "エクスポート",
+    "print": "印刷",
+    "search": "検索",
+    "date": "日付",
+    "total": "合計",
+    "average": "平均",
+    "percentage": "パーセンテージ"
+  }
+}

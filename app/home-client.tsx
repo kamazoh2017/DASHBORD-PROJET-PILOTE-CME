@@ -6,6 +6,7 @@ import PeriodFilter from '@/components/period-filter';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, PieChart, Pie, Cell, ReferenceLine, LineChart, Line } from 'recharts';
 import { formatDateFR, FINAL_TARGET, PROJECT_START_DATE } from '@/lib/constants';
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface HomeData {
   totalEnregistrees: number;
@@ -40,6 +41,7 @@ function PeriodBadge({ startDate, endDate }: { startDate: string; endDate: strin
 }
 
 export default function HomeClient({ data: initialData }: HomeClientProps) {
+  const t = useTranslations('home');
   const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [exporting, setExporting] = useState(false);
@@ -307,14 +309,14 @@ export default function HomeClient({ data: initialData }: HomeClientProps) {
     <div ref={contentRef}>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">Tableau de Bord - Phase Pilote</h1>
-          <p className="text-gray-600">Digitalisation du Carnet Mère-Enfant - Côte d'Ivoire</p>
+          <h1 className="text-2xl font-bold text-gray-800">{t('pageTitle')} - {t('period.label')}</h1>
+          <p className="text-gray-600">{t.rich('metadata.description', { br: () => <br /> })}</p>
         </div>
         <div className="flex items-center gap-4">
           {data?.lastRefresh && (
             <div className="flex items-center gap-2 text-sm text-gray-500">
               <RefreshCw size={16} />
-              <span>Dernière actualisation: {formatDateFR(data.lastRefresh)}</span>
+              <span>{t('lastRefresh')}: {formatDateFR(data.lastRefresh)}</span>
             </div>
           )}
           {/* Bouton Export PDF */}
@@ -326,12 +328,12 @@ export default function HomeClient({ data: initialData }: HomeClientProps) {
             {exporting ? (
               <>
                 <Loader2 className="animate-spin" size={18} />
-                <span>Export en cours...</span>
+                <span>{t('export.exporting')}</span>
               </>
             ) : (
               <>
                 <FileDown size={18} />
-                <span>Exporter PDF</span>
+                <span>{t('export.button')}</span>
               </>
             )}
           </button>
@@ -349,16 +351,16 @@ export default function HomeClient({ data: initialData }: HomeClientProps) {
       {loading && (
         <div className="flex items-center justify-center gap-2 text-orange-500 mb-4">
           <Loader2 className="animate-spin" size={20} />
-          <span>Chargement des données...</span>
+          <span>{t('common.loading')}</span>
         </div>
       )}
 
       {!data?.hasData ? (
         <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-8 text-center">
           <RefreshCw size={48} className="mx-auto text-yellow-500 mb-4" />
-          <h2 className="text-xl font-semibold text-yellow-700 mb-2">Aucune donnée disponible</h2>
+          <h2 className="text-xl font-semibold text-yellow-700 mb-2">{t('noData')}</h2>
           <p className="text-yellow-600 mb-4">
-            Cliquez sur le bouton "Actualiser les données" dans la barre latérale pour charger les données depuis Google Sheets.
+            {t.rich('common.noDataAvailable', { br: () => <br /> })}
           </p>
         </div>
       ) : (
@@ -366,35 +368,35 @@ export default function HomeClient({ data: initialData }: HomeClientProps) {
           {/* KPI Cards - Ligne 1 */}
           <div className="bg-white rounded-xl shadow-md p-6 mb-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-gray-800">Indicateurs Clés de Performance</h3>
+              <h3 className="font-semibold text-gray-800">{t('kpis.registered')}</h3>
               <PeriodBadge startDate={startDate} endDate={endDate} />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <KPICard
-                title="Femmes Enceintes Enregistrées"
+                title={t('kpis.registered')}
                 value={data?.totalEnregistrees ?? 0}
-                subtitle="Total cumulé"
+                subtitle={t('common.total')}
                 icon={Users}
                 color="orange"
               />
               <KPICard
-                title="Femmes Enceintes Connectées"
+                title={t('kpis.connected')}
                 value={data?.totalConnectees ?? 0}
-                subtitle="À Mama Info"
+                subtitle="Mama Info"
                 icon={UserCheck}
                 color="green"
               />
               <KPICard
-                title="Objectif Cumulé FE Enregistrées"
+                title={t('kpis.cumulativeTarget')}
                 value={data?.objectifCumule ?? 0}
-                subtitle={`${data?.joursOuvrables ?? 0} jours × 22`}
+                subtitle={`${data?.joursOuvrables ?? 0} ${t('kpis.workingDays')} × 22`}
                 icon={Target}
                 color="blue"
               />
               <KPICard
-                title="Taux d'Atteinte"
+                title={t('kpis.achievementRate')}
                 value={`${data?.tauxAtteinte ?? 0}%`}
-                subtitle="vs objectif cumulé"
+                subtitle={t('kpis.cumulativeTarget')}
                 icon={TrendingUp}
                 color={data?.tauxAtteinte >= 100 ? 'green' : data?.tauxAtteinte >= 75 ? 'orange' : 'red'}
               />
@@ -406,31 +408,31 @@ export default function HomeClient({ data: initialData }: HomeClientProps) {
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-semibold text-gray-800 flex items-center gap-2">
                 <Flag className="text-orange-500" size={20} />
-                Comparaison : Performance vs Objectif vs Cible Finale
+                {t('comparison.title')}
               </h3>
               <PeriodBadge startDate={startDate} endDate={endDate} />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* 1. Cible Finale en premier */}
               <div className="text-center p-4 bg-purple-50 rounded-lg">
-                <p className="text-sm text-gray-600 mb-1">Cible Finale (27 Février)</p>
+                <p className="text-sm text-gray-600 mb-1">{t('comparison.finalTarget')}</p>
                 <p className="text-3xl font-bold text-purple-600">{FINAL_TARGET}</p>
                 <p className="text-xs text-gray-500 mt-1">100%</p>
               </div>
               {/* 2. Objectif Cumulé */}
               <div className="text-center p-4 bg-blue-50 rounded-lg">
-                <p className="text-sm text-gray-600 mb-1">Objectif Cumulé à date</p>
+                <p className="text-sm text-gray-600 mb-1">{t('comparison.currentTarget')}</p>
                 <p className="text-3xl font-bold text-blue-600">{data?.objectifCumule ?? 0}</p>
                 <p className="text-xs text-gray-500 mt-1">
-                  {Math.round((data?.objectifCumule ?? 0) / FINAL_TARGET * 100)}% de la cible | {data?.joursOuvrables ?? 0} jours × 22
+                  {Math.round((data?.objectifCumule ?? 0) / FINAL_TARGET * 100)}% | {data?.joursOuvrables ?? 0} {t('kpis.workingDays')} × 22
                 </p>
               </div>
               {/* 3. FE Enregistrées */}
               <div className="text-center p-4 bg-green-50 rounded-lg">
-                <p className="text-sm text-gray-600 mb-1">FE Enregistrées à date</p>
+                <p className="text-sm text-gray-600 mb-1">{t('comparison.performance')}</p>
                 <p className="text-3xl font-bold text-green-600">{data?.totalEnregistrees ?? 0}</p>
                 <p className="text-xs text-gray-500 mt-1">
-                  {Math.round((data?.totalEnregistrees ?? 0) / FINAL_TARGET * 100)}% Performance actuelle
+                  {Math.round((data?.totalEnregistrees ?? 0) / FINAL_TARGET * 100)}%
                 </p>
               </div>
             </div>
@@ -447,7 +449,7 @@ export default function HomeClient({ data: initialData }: HomeClientProps) {
                   style={{ width: `${Math.min((data?.objectifCumule ?? 0) / FINAL_TARGET * 100, 100)}%` }}
                 >
                   <span className="text-xs text-white font-medium drop-shadow">
-                    Objectif: {Math.round((data?.objectifCumule ?? 0) / FINAL_TARGET * 100)}%
+                    {t('comparison.currentTarget')}: {Math.round((data?.objectifCumule ?? 0) / FINAL_TARGET * 100)}%
                   </span>
                 </div>
                 {/* Barre de la performance (vert) */}
@@ -456,7 +458,7 @@ export default function HomeClient({ data: initialData }: HomeClientProps) {
                   style={{ width: `${Math.min((data?.totalEnregistrees ?? 0) / FINAL_TARGET * 100, 100)}%` }}
                 >
                   <span className="text-xs text-white font-medium drop-shadow">
-                    Perf: {Math.round((data?.totalEnregistrees ?? 0) / FINAL_TARGET * 100)}%
+                    {t('comparison.performance')}: {Math.round((data?.totalEnregistrees ?? 0) / FINAL_TARGET * 100)}%
                   </span>
                 </div>
               </div>
@@ -464,15 +466,15 @@ export default function HomeClient({ data: initialData }: HomeClientProps) {
                 <div className="flex items-center gap-4">
                   <span className="flex items-center gap-1">
                     <span className="w-3 h-3 bg-green-500 rounded"></span>
-                    <span className="text-green-600 font-medium">Performance: {data?.totalEnregistrees ?? 0} ({Math.round((data?.totalEnregistrees ?? 0) / FINAL_TARGET * 100)}%)</span>
+                    <span className="text-green-600 font-medium">{t('comparison.performance')}: {data?.totalEnregistrees ?? 0} ({Math.round((data?.totalEnregistrees ?? 0) / FINAL_TARGET * 100)}%)</span>
                   </span>
                   <span className="flex items-center gap-1">
                     <span className="w-3 h-3 bg-blue-400 rounded"></span>
-                    <span className="text-blue-600 font-medium">Objectif: {data?.objectifCumule ?? 0} ({Math.round((data?.objectifCumule ?? 0) / FINAL_TARGET * 100)}%)</span>
+                    <span className="text-blue-600 font-medium">{t('comparison.currentTarget')}: {data?.objectifCumule ?? 0} ({Math.round((data?.objectifCumule ?? 0) / FINAL_TARGET * 100)}%)</span>
                   </span>
                 </div>
                 <span className={`font-medium ${(data?.totalEnregistrees ?? 0) >= (data?.objectifCumule ?? 0) ? 'text-green-600' : 'text-red-600'}`}>
-                  {(data?.totalEnregistrees ?? 0) >= (data?.objectifCumule ?? 0) ? '✓ Objectif atteint' : `Écart: ${(data?.objectifCumule ?? 0) - (data?.totalEnregistrees ?? 0)} FE`}
+                  {(data?.totalEnregistrees ?? 0) >= (data?.objectifCumule ?? 0) ? `✓ ${t('comparison.targetAchieved')}` : `${t('comparison.gap')}: ${(data?.objectifCumule ?? 0) - (data?.totalEnregistrees ?? 0)}`}
                 </span>
               </div>
             </div>
@@ -481,7 +483,7 @@ export default function HomeClient({ data: initialData }: HomeClientProps) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             <div className="bg-white rounded-xl shadow-md p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-gray-800">Performance par Établissement</h3>
+                <h3 className="font-semibold text-gray-800">{t('charts.byEstablishment')}</h3>
                 <PeriodBadge startDate={startDate} endDate={endDate} />
               </div>
               <div className="h-80">
@@ -499,11 +501,11 @@ export default function HomeClient({ data: initialData }: HomeClientProps) {
                     <YAxis tickLine={false} tick={{ fontSize: 10 }} />
                     <Tooltip 
                       contentStyle={{ fontSize: 11, borderRadius: 8 }}
-                      formatter={(value: number, name: string) => [value, name === 'enregistrees' ? 'FE Enregistrées' : 'FE Connectées']}
+                      formatter={(value: number, name: string) => [value, name === 'enregistrees' ? t('charts.registered') : t('charts.connected')]}
                     />
                     <Legend verticalAlign="top" wrapperStyle={{ fontSize: 11 }} />
-                    <Bar dataKey="enregistrees" name="FE Enregistrées" fill="#FF6B00" radius={[4, 4, 0, 0]} />
-                    <Bar dataKey="connectees" name="FE Connectées" fill="#009639" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="enregistrees" name={t('charts.registered')} fill="#FF6B00" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="connectees" name={t('charts.connected')} fill="#009639" radius={[4, 4, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -511,7 +513,7 @@ export default function HomeClient({ data: initialData }: HomeClientProps) {
 
             <div className="bg-white rounded-xl shadow-md p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-gray-800">Répartition des Enregistrements par Établissement</h3>
+                <h3 className="font-semibold text-gray-800">{t('charts.distribution')}</h3>
                 <PeriodBadge startDate={startDate} endDate={endDate} />
               </div>
               <div className="h-80">
@@ -548,19 +550,19 @@ export default function HomeClient({ data: initialData }: HomeClientProps) {
 
           <div className="bg-white rounded-xl shadow-md p-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-gray-800">Résumé par Établissement</h3>
+              <h3 className="font-semibold text-gray-800">{t('charts.byEstablishment')}</h3>
               <PeriodBadge startDate={startDate} endDate={endDate} />
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead className="bg-gray-100">
                   <tr>
-                    <th className="px-4 py-3 text-left text-gray-700 font-semibold">Établissement</th>
-                    <th className="px-4 py-3 text-center text-gray-700 font-semibold">FE Reçues</th>
-                    <th className="px-4 py-3 text-center text-gray-700 font-semibold">FE Enregistrées</th>
-                    <th className="px-4 py-3 text-center text-gray-700 font-semibold">Taux Enregistrement</th>
-                    <th className="px-4 py-3 text-center text-gray-700 font-semibold">FE Connectées</th>
-                    <th className="px-4 py-3 text-center text-gray-700 font-semibold">Taux Connexion</th>
+                    <th className="px-4 py-3 text-left text-gray-700 font-semibold">{t('table.establishment')}</th>
+                    <th className="px-4 py-3 text-center text-gray-700 font-semibold">{t('table.received')}</th>
+                    <th className="px-4 py-3 text-center text-gray-700 font-semibold">{t('table.registered')}</th>
+                    <th className="px-4 py-3 text-center text-gray-700 font-semibold">{t('table.registrationRate')}</th>
+                    <th className="px-4 py-3 text-center text-gray-700 font-semibold">{t('table.connected')}</th>
+                    <th className="px-4 py-3 text-center text-gray-700 font-semibold">{t('table.connectionRate')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
@@ -601,7 +603,7 @@ export default function HomeClient({ data: initialData }: HomeClientProps) {
                   {/* Ligne Total */}
                   {data?.byEtablissement && data.byEtablissement.length > 0 && (
                     <tr className="bg-orange-50 font-semibold">
-                      <td className="px-4 py-3">TOTAL</td>
+                      <td className="px-4 py-3">{t('table.total')}</td>
                       <td className="px-4 py-3 text-center text-blue-600">{data.totalRecues ?? 0}</td>
                       <td className="px-4 py-3 text-center text-orange-600">{data.totalEnregistrees ?? 0}</td>
                       <td className="px-4 py-3 text-center">

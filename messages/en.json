@@ -1,0 +1,170 @@
+{
+  "metadata": {
+    "title": "Pilot Phase Dashboard - Digital Mother-Child Health Record",
+    "description": "Dashboard for tracking the pilot phase of the mother-child health record digitalization project in Côte d'Ivoire"
+  },
+  "sidebar": {
+    "title": "Pilot Phase",
+    "subtitle": "Digital Mother-Child Record",
+    "nav": {
+      "home": "Home",
+      "supervision": "Supervision Report",
+      "application": "Application Report",
+      "comparison": "Supervision vs App Comparison"
+    },
+    "refreshButton": "Refresh Data",
+    "refreshing": "Refreshing...",
+    "footer": "Côte d'Ivoire 2026"
+  },
+  "home": {
+    "pageTitle": "Overview",
+    "kpis": {
+      "registered": "Registered Pregnant Women",
+      "connected": "Connected Pregnant Women",
+      "received": "Received Pregnant Women",
+      "cumulativeTarget": "Cumulative Target",
+      "achievementRate": "Achievement Rate",
+      "workingDays": "Working Days",
+      "totalDays": "Total Days"
+    },
+    "charts": {
+      "byEstablishment": "By Establishment",
+      "dailyProgress": "Daily Progress",
+      "distribution": "Distribution",
+      "registered": "Registered",
+      "connected": "Connected",
+      "received": "Received"
+    },
+    "table": {
+      "establishment": "Establishment",
+      "received": "Received",
+      "registered": "Registered",
+      "registrationRate": "Registration Rate",
+      "connected": "Connected",
+      "connectionRate": "Connection Rate",
+      "total": "Total"
+    },
+    "comparison": {
+      "title": "Performance vs Target vs Final Goal",
+      "finalTarget": "Final Target (Feb 27) - 100%",
+      "currentTarget": "Current Target",
+      "performance": "Performance",
+      "targetAchieved": "Target Achieved",
+      "gap": "Gap"
+    },
+    "period": {
+      "label": "Period",
+      "from": "from",
+      "to": "to"
+    },
+    "export": {
+      "button": "Export PDF",
+      "exporting": "Exporting..."
+    },
+    "noData": "No data available",
+    "lastRefresh": "Last refresh"
+  },
+  "supervision": {
+    "pageTitle": "Supervision Report",
+    "kpis": {
+      "trainedMidwives": "Trained Midwives",
+      "presentMidwives": "Present Midwives",
+      "registeredPregnant": "Registered Pregnant Women",
+      "connectedPregnant": "Connected Pregnant Women"
+    },
+    "charts": {
+      "dailyEvolution": "Daily Evolution",
+      "byEstablishment": "By Establishment",
+      "registered": "Registered",
+      "connected": "Connected",
+      "midwives": "Midwives"
+    },
+    "table": {
+      "date": "Date",
+      "establishment": "Establishment",
+      "trainedMidwives": "Trained",
+      "presentMidwives": "Present",
+      "receivedPregnant": "Received",
+      "registeredPregnant": "Registered",
+      "connectedPregnant": "Connected",
+      "registrationRate": "Reg. Rate",
+      "connectionRate": "Conn. Rate"
+    }
+  },
+  "application": {
+    "pageTitle": "Application Report",
+    "kpis": {
+      "trainedMidwives": "Trained Midwives",
+      "presentMidwives": "Present Midwives",
+      "registeredPregnant": "Registered Pregnant Women",
+      "connectedPregnant": "Connected Pregnant Women"
+    },
+    "charts": {
+      "dailyEvolution": "Daily Evolution",
+      "byEstablishment": "By Establishment",
+      "registered": "Registered",
+      "connected": "Connected"
+    },
+    "table": {
+      "date": "Date",
+      "establishment": "Establishment",
+      "trainedMidwives": "Trained",
+      "presentMidwives": "Present",
+      "receivedPregnant": "Received",
+      "registeredPregnant": "Registered",
+      "connectedPregnant": "Connected",
+      "registrationRate": "Reg. Rate",
+      "connectionRate": "Conn. Rate"
+    }
+  },
+  "comparison": {
+    "pageTitle": "Supervision vs Application Comparison",
+    "tabs": {
+      "overview": "Overview",
+      "details": "Details"
+    },
+    "charts": {
+      "comparisonByEstablishment": "Comparison by Establishment",
+      "dailyComparison": "Daily Comparison",
+      "supervision": "Supervision",
+      "application": "Application",
+      "registered": "Registered",
+      "connected": "Connected"
+    },
+    "table": {
+      "establishment": "Establishment",
+      "supervisionRegistered": "Sup. Registered",
+      "applicationRegistered": "App. Registered",
+      "difference": "Difference",
+      "concordanceRate": "Concordance Rate",
+      "supervisionConnected": "Sup. Connected",
+      "applicationConnected": "App. Connected"
+    },
+    "kpis": {
+      "totalSupervision": "Total Supervision",
+      "totalApplication": "Total Application",
+      "totalDifference": "Total Difference",
+      "concordanceRate": "Concordance Rate"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "noDataAvailable": "No data available",
+    "all": "All",
+    "filter": "Filter",
+    "reset": "Reset",
+    "apply": "Apply",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "export": "Export",
+    "print": "Print",
+    "search": "Search",
+    "date": "Date",
+    "total": "Total",
+    "average": "Average",
+    "percentage": "Percentage"
+  }
+}
